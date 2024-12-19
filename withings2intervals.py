@@ -153,14 +153,18 @@ def main():
             if temp_field and m["type"] in [71, 73]:
                 wellness[day][temp_field] = float(m["value"] * (10 ** m["unit"]))
         logging.debug("Day: %s - Measures: %s" % (day, wellness[day]))
+    skipped_days = False
     for day, data in sorted(wellness.items()):
         if str(day) in synced_days and not args.force_resync:
-            logging.info(f"Skipping already synced day: {day}")
+            logging.debug(f"Skipping already synced day: {day}")
+            skipped_days = True
             continue
         data["id"] = day.strftime("%Y-%m-%d")
         logging.info(f"Processing wellness data for {data['id']}: {data}")
         set_wellness(data, api_intervals, icu_api_key)
         synced_days.add(str(day))
+    if skipped_days and not args.verbose and not args.force_resync:
+        logging.info("Note that some days were skipped because already synced (you can use --force-resync if you want to sync everything)")
 
     save_synced_days(synced_days)
     logging.info("Sync completed successfully.")
