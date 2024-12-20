@@ -41,7 +41,7 @@ def parse_args():
         help="Path to the configuration file",
     )
     parser.add_argument(
-        "--auth-code", type=str, help="Authorization code for initial authentication"
+        "--auth-code", type=str, default="", help="Authorization code to complete initial authentication"
     )
     parser.add_argument(
         "--start",
@@ -128,6 +128,8 @@ Open the following link in your browser:
 2. Copy the code from the browser URL (after "?code=").
 3. Run this tool again with the authorization code:
 python withings2intervals.py --auth-code <YOUR_CODE>
+
+You will need to do this only once, if successful you don't need the --auth-code anymore.
 ================================================================================
 {Style.RESET_ALL}
             """)
