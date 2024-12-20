@@ -2,3 +2,4 @@ withings.json
 synced_weights.json
 config.ini
 *.log
+/dist

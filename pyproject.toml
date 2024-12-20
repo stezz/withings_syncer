@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "withings-syncer"
+name = "withings2intervals"
 version = "0.1.0"
-description = ""
-authors = ["Stefano Mosconi"]
+description = "Sync Withings data to Intervals.icu"
+authors = ["Stefano Mosconi <stefano.mosconi@gmail.com>"]
 readme = "README.md"
+packages = [{ include = "withings2intervals" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
