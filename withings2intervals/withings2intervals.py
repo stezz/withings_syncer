@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 import configparser
 import argparse
 import logging
+from colorama import Fore, Style
 
 loglevel = logging.INFO
 # Set up logging
@@ -113,7 +114,23 @@ def main():
                 client_id, client_secret, redirect_uri, cfg, args.auth_code
             )
         else:
-            logging.error("Authorization code is required for initial authentication.")
+            link = f"https://account.withings.com/oauth2_user/authorize2?response_type=code&client_id={client_id}&state=intervals&scope=user.metrics&redirect_uri={redirect_uri}"
+
+            print(f"""
+{Fore.YELLOW}{Style.BRIGHT}
+================================================================================
+Authorization Required
+================================================================================
+Open the following link in your browser:
+{link}
+
+1. Authenticate with your Withings account.
+2. Copy the code from the browser URL (after "?code=").
+3. Run this tool again with the authorization code:
+python withings2intervals.py --auth-code <YOUR_CODE>
+================================================================================
+{Style.RESET_ALL}
+            """)
             sys.exit(1)
 
     # Determine the start date for syncing

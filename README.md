@@ -16,6 +16,31 @@ This script is a fork of [this Gist](https://gist.github.com/fruitloop/7e79eeab9
 - Supports a `--force-resync` option to re-upload data.
 - Debugging support with `-v`.
 
+## Usage
+You can simply install the package from PyPi
+`pip install withings2intervals`
+
+## Setup
+
+### 1. Create a Withings Developer App
+1. Go to the [Withings Developer Portal](https://developer.withings.com/).
+2. Sign in and create a new app:
+   - **App Name**: Choose a name (e.g., "Withings Syncer").
+   - **Callback URL**: Use `http://localhost:80`.
+   - Save the app and copy the **Client ID** and **Client Secret** to the `config.ini`
+
+### 2. Get your intervals.icu keys
+1. Go to the [Intervals.icu settings page](https://intervals.icu/settings)
+2. Scroll until you see **Developer Settings**
+3. Click on "API Key (view)"
+4. Click on "Generate"
+5. Copy the generated API key to the `config.ini`
+6. Copy also the "Athlete ID" to `config.ini`
+
+
+
+
+
 ## Installation
 
 1. **Clone the Repository**:
