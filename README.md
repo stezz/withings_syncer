@@ -16,9 +16,30 @@ This script is a fork of [this Gist](https://gist.github.com/fruitloop/7e79eeab9
 - Supports a `--force-resync` option to re-upload data.
 - Debugging support with `-v`.
 
-## Usage
+## Installation from pip
 You can simply install the package from PyPi
-`pip install withings2intervals`
+```bash
+pip install withings2intervals
+```
+
+## Installation from repository
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/withings_syncer.git
+   cd withings_syncer
+   ```
+
+2. **Install Dependencies with Poetry**:
+   Make sure you have [Poetry](https://python-poetry.org/docs/#installation) installed.
+   ```bash
+   poetry install
+   ```
+
+3. **Enter poetry virtual env**
+   ```bash
+   poetry shell
+   ```
 
 ## Setup
 
@@ -37,47 +58,11 @@ You can simply install the package from PyPi
 5. Copy the generated API key to the `config.ini`
 6. Copy also the "Athlete ID" to `config.ini`
 
+## 3. Run initial authentication
+1. Run `python withings2intervals.py`
+2. Follow on screen instructions
 
-
-
-
-## Installation
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/withings_syncer.git
-   cd withings_syncer
-   ```
-
-2. **Install Dependencies with Poetry**:
-   Make sure you have [Poetry](https://python-poetry.org/docs/#installation) installed.
-   ```bash
-   poetry install
-   ```
-
-3. **Set Up Configuration Files**:
-   Create a `config.ini` file with your API credentials:
-   ```ini
-   [Withings]
-   client_id = YOUR_CLIENT_ID
-   client_secret = YOUR_CLIENT_SECRET
-   redirect_uri = http://localhost:80
-
-   [Intervals]
-   icu_api_key = YOUR_ICU_API_KEY
-   icu_athlete_id = YOUR_ATHLETE_ID
-
-   [Fields]
-   weight_field = weight
-   bodyfat_field = bodyFat
-   diastolic_field = diastolic
-   systolic_field = systolic
-   muscle_field = MuscleMass
-   temp_field = BodyTemperature
-
-   [General]
-   withings_config = ./withings.json
-   ```
+Once the initial authentication is successfully completed your OAuth2 token will be saved locally and you will be able to run subsequent synchronizations.
 
 ## Usage
 
@@ -95,7 +80,7 @@ Run the script with the following options:
 
 - **Force Resync**:
   ```bash
-  python withings2intervals.py --force-resync
+  python withings2intervals.py --start 2024-12-01 --force-resync
   ```
 
 - **Verbose Debugging**:
