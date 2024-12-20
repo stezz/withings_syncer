@@ -1,5 +1,5 @@
 
-# Withings Syncer
+# Withings2Intervals
 
 A Python script to sync wellness data from Withings to [Intervals.icu](https://intervals.icu).
 
