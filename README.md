@@ -36,10 +36,16 @@ pip install withings2intervals
    poetry install
    ```
 
-3. **Enter poetry virtual env**
+3. **Build**
    ```bash
-   poetry shell
+   poetry build
    ```
+
+4. **Install**
+   ```bash
+   pip install dist/withings2intervals-<version>.whl
+   ```
+
 
 ## Setup
 
@@ -70,22 +76,22 @@ Run the script with the following options:
 
 - **Sync Today's Data**:
   ```bash
-  python withings2intervals.py
+  withings2intervals
   ```
 
 - **Sync Data from a Specific Date**:
   ```bash
-  python withings2intervals.py --start 2024-12-01
+  withings2intervals --start 2024-12-01
   ```
 
 - **Force Resync**:
   ```bash
-  python withings2intervals.py --start 2024-12-01 --force-resync
+  withings2intervals --start 2024-12-01 --force-resync
   ```
 
 - **Verbose Debugging**:
   ```bash
-  python withings2intervals.py -v
+  withings2intervals -v
   ```
 
 ## Acknowledgments

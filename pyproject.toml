@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "withings2intervals"
-version = "0.1.1"
+version = "0.1.2"
 description = "Sync Withings data to Intervals.icu"
 authors = ["Stefano Mosconi <stefano.mosconi@gmail.com>"]
 readme = "README.md"
@@ -11,6 +11,8 @@ python = "^3.12"
 requests = "^2.32.3"
 colorama = "^0.4.6"
 
+[tool.poetry.scripts]
+withings2intervals = "withings2intervals.withings2intervals:main"
 
 [build-system]
 requires = ["poetry-core"]
