@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "withings2intervals"
-version = "0.1.3"
+version = "0.1.4"
 description = "Sync Withings data to Intervals.icu"
 authors = ["Stefano Mosconi <stefano.mosconi@gmail.com>"]
 readme = "README.md"
