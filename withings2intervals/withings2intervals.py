@@ -41,7 +41,10 @@ def parse_args():
         help="Path to the configuration file",
     )
     parser.add_argument(
-        "--auth-code", type=str, default="", help="Authorization code to complete initial authentication"
+        "--auth-code",
+        type=str,
+        default="",
+        help="Authorization code to complete initial authentication",
     )
     parser.add_argument(
         "--start",
@@ -116,7 +119,8 @@ def main():
         else:
             link = f"https://account.withings.com/oauth2_user/authorize2?response_type=code&client_id={client_id}&state=intervals&scope=user.metrics&redirect_uri={redirect_uri}"
 
-            print(f"""
+            print(
+                f"""
 {Fore.YELLOW}{Style.BRIGHT}
 ================================================================================
 Authorization Required
@@ -132,7 +136,8 @@ python withings2intervals.py --auth-code <YOUR_CODE>
 You will need to do this only once, if successful you don't need the --auth-code anymore.
 ================================================================================
 {Style.RESET_ALL}
-            """)
+            """
+            )
             sys.exit(1)
 
     # Determine the start date for syncing
@@ -164,7 +169,10 @@ You will need to do this only once, if successful you don't need the --auth-code
             if bodyfat_field and m["type"] == 6:
                 wellness[day][bodyfat_field] = float(m["value"] * (10 ** m["unit"]))
             if muscle_field and m["type"] == 76:
-                wellness[day][muscle_field] = float(m["value"] * (10 ** m["unit"]))
+                print(m["value"], m["unit"])
+                wellness[day][muscle_field] = float(
+                    m["value"] * (10 ** m["unit"]) / wellness[day][weight_field] * 100
+                )
             if diastolic_field and m["type"] == 9:
                 wellness[day][diastolic_field] = float(m["value"] * (10 ** m["unit"]))
             if systolic_field and m["type"] == 10:
@@ -183,7 +191,9 @@ You will need to do this only once, if successful you don't need the --auth-code
         set_wellness(data, api_intervals, icu_api_key)
         synced_days.add(str(day))
     if skipped_days and not args.verbose and not args.force_resync:
-        logging.info("Note that some days were skipped because already synced (you can use --force-resync if you want to sync everything)")
+        logging.info(
+            "Note that some days were skipped because already synced (you can use --force-resync if you want to sync everything)"
+        )
 
     save_synced_days(synced_days)
     logging.info("Sync completed successfully.")

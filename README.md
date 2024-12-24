@@ -11,7 +11,7 @@ This script is a fork of [this Gist](https://gist.github.com/fruitloop/7e79eeab9
 
 ## Features
 - Fetches data from Withings using their API.
-- Uploads wellness data (weight, body fat, blood pressure, etc.) to Intervals.icu.
+- Uploads wellness data (weight, body fat %, muscle mass %, blood pressure, etc.) to Intervals.icu.
 - Tracks synced days to avoid duplicate uploads.
 - Supports a `--force-resync` option to re-upload data.
 - Debugging support with `-v`.
