@@ -101,6 +101,7 @@ def main():
     systolic_field = config["Fields"].get("systolic_field", None)
     muscle_field = config["Fields"].get("muscle_field", None)
     temp_field = config["Fields"].get("temp_field", None)
+    hydration_field = config["Fields"].get("hydration_field", None)
 
     api_withings = "https://wbsapi.withings.net/v2"
     api_intervals = f"https://intervals.icu/api/v1/athlete/{icu_athlete_id}"
@@ -179,6 +180,10 @@ You will need to do this only once, if successful you don't need the --auth-code
                 wellness[day][systolic_field] = float(m["value"] * (10 ** m["unit"]))
             if temp_field and m["type"] in [71, 73]:
                 wellness[day][temp_field] = float(m["value"] * (10 ** m["unit"]))
+            if hydration_field and m["type"] == 77:
+                wellness[day][hydration_field] = float(
+                    m["value"] * (10 ** m["unit"]) / wellness[day][weight_field] * 100
+                )
         logging.debug("Day: %s - Measures: %s" % (day, wellness[day]))
     skipped_days = False
     for day, data in sorted(wellness.items()):
@@ -280,7 +285,7 @@ def get_measurements(token, api_withings, start_date):
             headers={"Authorization": f"Bearer {token}"},
             params={
                 "action": "getmeas",
-                "meastypes": "1,6,9,10,71,73,76",  # All measurement types
+                "meastypes": "1,6,9,10,71,73,76,77",  # All measurement types
                 "category": 1,
                 "lastupdate": int(start_date.timestamp()),
             },
